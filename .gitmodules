@@ -1,0 +1,6 @@
+[submodule "minbpe"]
+	path = minbpe
+	url = https://github.com/karpathy/minbpe.git
+[submodule "nanogpt"]
+	path = nanogpt
+	url = https://github.com/karpathy/nanogpt.git
