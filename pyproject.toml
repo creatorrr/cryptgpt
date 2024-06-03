@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "cryptgpt"
+version = "0.1.0"
+description = ""
+authors = ["Diwank Tomer <diwank@julep.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+datasets = "^2.19.1"
+transformers = "^4.41.2"
+tokenizers = "^0.19.1"
+torch = "^2.3.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.25.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

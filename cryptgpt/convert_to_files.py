@@ -17,6 +17,6 @@ def combine_and_save(rows, idxs):
         for text in texts:
             f.write(text)
     return dict(file=[file]*len(texts))
-    
+
 batch_size = 1000
 subset.map(combine_and_save, batched=True, batch_size=batch_size, with_indices=True, num_proc=num_proc // 2)

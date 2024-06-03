@@ -73,6 +73,8 @@ encrypt_ = partial(encrypt, key=key)
 decrypt_ = partial(decrypt, key=key)
 
 if __name__ == "__main__":
+    test_encrypt_decrypt()
+
     dataset = load_dataset("openwebtext", num_proc=num_proc_load_dataset)
     dataset = dataset.map(
         lambda row: dict(encrypted=encrypt_(row["text"]) + gpt2_tokenizer.eos_token),
