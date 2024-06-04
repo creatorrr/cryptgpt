@@ -81,6 +81,6 @@ if __name__ == "__main__":
         num_proc=num_proc-2
     )
 
-    dataset = dataset.remove_columns(["text"])
+    dataset = dataset.remove_columns(["text"]).rename_column("encrypted", "text")
 
-    dataset.push_to_hub("diwank/encrypted-openwebtext", num_shards={"train": 20})
+    dataset.push_to_hub("diwank/encrypted-openwebtext", num_shards={"train": 20}, private=True)
