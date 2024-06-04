@@ -1,0 +1,55 @@
+# See:
+# - https://github.com/karpathy/nanoGPT/blob/master/config/train_gpt2.py#L1
+# - https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/examples/tiny-llama/pretrain.yml#L14
+# - https://github.com/karpathy/nanoGPT/blob/master/train.py#L35
+
+base_model: diwank/cryptgpt
+
+model_type: GPT2LMHeadModel
+tokenizer_type: AutoTokenizer
+trust_remote_code: true  # required for CryptGPTTokenizer
+
+pretraining_dataset:
+  path: diwank/encrypted-openwebtext
+  type: pretrain
+dataset_prepared_path: ./cryptgpt-prepared-dataset
+val_set_size: 0.05
+output_dir: ./outputs/model-out
+resize_token_embeddings_to_32x: true
+shuffle_merged_datasets: false
+
+max_steps: 600000
+eval_steps: 12000
+save_steps: 12000
+
+sequence_len: 1024
+sample_packing: true
+pad_to_sequence_len: true
+torch_compile: true
+train_on_inputs: true
+
+wandb_project: cryptgpt-0.1
+wandb_name: cryptgpt-run-01
+
+gradient_accumulation_steps: 3
+micro_batch_size: 4
+optimizer: adamw_bnb_8bit
+adam_beta1: 0.9
+adam_beta2: 0.95
+
+lr_scheduler: cosine
+learning_rate: 6e-4
+# min: 6e-5
+cosine_min_lr_ratio: 0.1
+
+bf16: auto
+tf32: true
+
+gradient_checkpointing: true
+auto_resume_from_checkpoints: true
+logging_steps: 1
+flash_attention: true
+
+deepspeed: deepspeed_configs/zero1.json
+weight_decay: 0.1
+seed: 42
