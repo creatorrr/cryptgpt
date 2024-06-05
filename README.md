@@ -25,3 +25,7 @@ Train model:
 - Run using the `training/axolotl.yaml` config file:
 - `accelerate launch -m axolotl.cli.train training/axolotl.yaml`
 - Wait for ~36-48 hours
+
+Results:
+
+![image](https://github.com/creatorrr/cryptgpt/assets/931887/d71a5d3d-67a7-496a-b4c8-7d48590ac9ab)
