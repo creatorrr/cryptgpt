@@ -1,0 +1,59 @@
+# See:
+# - https://github.com/karpathy/nanoGPT/blob/master/config/train_gpt2.py#L1
+# - https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/examples/tiny-llama/pretrain.yml#L14
+# - https://github.com/karpathy/nanoGPT/blob/master/train.py#L35
+
+base_model: diwank/cryptgpt-large
+hub_model_id: diwank/cryptgpt-large
+
+model_type: GPT2LMHeadModel
+tokenizer_type: AutoTokenizer
+trust_remote_code: true  # required for CryptGPTTokenizer
+resize_token_embeddings_to_32x: true
+output_dir: ./outputs/model-out
+
+datasets:
+  - path: diwank/encrypted-openwebtext
+    type: completion
+
+dataset_prepared_path: ./cryptgpt-prepared-dataset
+val_set_size: 0.04
+shuffle_merged_datasets: false
+
+sequence_len: 1024
+pad_to_sequence_len: true
+sample_packing: false
+pretrain_multipack_attn: false
+train_on_inputs: true
+
+gradient_accumulation_steps: 3
+micro_batch_size: 24
+optimizer: adamw_bnb_8bit
+adam_beta1: 0.9
+adam_beta2: 0.95
+seed: 42
+
+lr_scheduler: cosine
+learning_rate: 6e-4
+cosine_min_lr_ratio: 0.1  # min: 6e-5
+weight_decay: 0.15
+
+bf16: auto
+tf32: true
+flash_attention: true
+torch_compile: true
+gradient_checkpointing: false
+deepspeed: deepspeed_configs/zero2.json
+
+epochs: 20  # overriden by max_steps
+max_steps: 1200000
+eval_steps: 12000
+save_steps: 12000
+auto_resume_from_checkpoints: true
+logging_steps: 1
+eval_max_new_tokens: 128
+eval_causal_lm_metrics: 
+  - sacrebleu
+
+wandb_project: cryptgpt-large-0.1
+wandb_name: cryptgpt-large-run-01

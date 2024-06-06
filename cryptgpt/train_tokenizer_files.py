@@ -55,6 +55,7 @@ hf_tokenizer = CryptGPTTokenizer(tokenizer_file="./cryptgpt-tokenizer/fast_token
 
 hf_tokenizer.model_max_length = gpt2_tokenizer.model_max_length
 hf_tokenizer.eos_token = eos_token
+hf_tokenizer.pad_token = eos_token
 
 print("saving hf tokenizer")
 hf_tokenizer.save_pretrained("./cryptgpt-tokenizer/")
