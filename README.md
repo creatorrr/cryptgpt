@@ -1,5 +1,8 @@
 # cryptgpt
 
+[Introductory blog post](https://huggingface.co/blog/diwank/cryptgpt-part1)
+-----
+
 W&B training logs: https://wandb.ai/diwank/cryptgpt-0.1
 Huggingface: https://huggingface.co/diwank/cryptgpt
 
